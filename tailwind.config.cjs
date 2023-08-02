@@ -1,12 +1,17 @@
 /** @type {import('tailwindcss').Config}*/
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
 
-	theme: {
-		extend: {}
-	},
+  theme: {
+    extend: {
+      fontFamily: {
+        cabinet: ['"CabinetGrotesk"'],
+        supreme: ['"Supreme"']
+      }
+    }
+  },
 
-	plugins: []
+  plugins: []
 };
 
 module.exports = config;
