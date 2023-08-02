@@ -1,40 +1,11 @@
-# create-svelte
-
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 # dreamscribe
-# dreamscribe
+
+A free online dream journal made as a part of my Year 11 Digi Class. Built with Svelte and TailwindCSS.
+
+## Setup instructions
+
+If I haven't hosted this somewhere, you can run the project by following these steps
+
+1. Download this repo (if you have the GitHub CLI installed, you can run `gh repo clone lia-skl/dreamscribe` in the folder you'd like to save it to).
+2. Assuming you have Node JS and NPM installed, enter the `dreamscribe` folder you have downloaded and then run `npm install`.
+3. Then, you simply need to run `npm run dev -- --open` and it should pop up in your browser window.
