@@ -13,17 +13,7 @@
       id="main"
       bind:value={input}
     />
-    <div class="flex h-16 items-center px-4">
-      <label for="mood">Mood:</label>
-      <select name="mood" id="mood" class="rounded-md bg-base3 py-2 pl-3 pr-8 text-base03">
-        <option value="" selected disabled>Select a mood</option>
-        <option value="Happy">Happy</option>
-        <option value="Sad">Sad</option>
-        <option value="Anxious">Anxious</option>
-        <option value="Scary">Scary</option>
-        <option value="Nostalgic">Nostalgic</option>
-        <option value="Crazy">Crazy</option>
-      </select>
+      <Button variant="primary"><span slot="text">Save</span></Button>
     </div>
   </form>
   <div class="h-full w-80 bg-purple-300" />

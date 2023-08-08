@@ -1,9 +1,9 @@
 <script lang="ts">
-  export let variant: 'default' | 'secondary' | 'destructive' | 'disabled';
+  export let variant: 'primary' | 'secondary' | 'destructive' | 'disabled';
 </script>
 
 <button
-  class:btn-default={variant == 'default'}
+  class:btn-primary={variant == 'primary'}
   class:btn-secondary={variant == 'secondary'}
   class:btn-destructive={variant == 'destructive'}
   class:btn-disabled={variant == 'disabled'}
