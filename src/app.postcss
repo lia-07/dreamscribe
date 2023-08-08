@@ -20,5 +20,20 @@
 }
 
 body {
-  @apply bg-base02 text-base3;
+  @apply scroll-smooth bg-base03 text-base3;
+}
+
+@layer utilities {
+  .btn-default {
+    @apply bg-base2 text-base03;
+  }
+  .btn-secondary {
+    @apply bg-base01 text-base3;
+  }
+  .btn-destructive {
+    @apply bg-red text-base3;
+  }
+  .btn-disabled {
+    @apply cursor-not-allowed bg-base1 text-base03;
+  }
 }
