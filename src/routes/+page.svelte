@@ -1,18 +1,31 @@
 <script lang="ts">
+  // Import a module that executes code when the website is opened.
   import { onMount } from 'svelte';
 
+  // Import the JournalEntry type
   import type { JournalEntry } from '../app';
 
+  // Import my journal entry array, which is saved in a local storage store.
   import { journalEntries } from '$lib/stores/journalEntries';
 
+  // Import my timestamp formatter function
   import { formatTimestamp } from '$lib/scripts/timestamp';
 
+  // Import my button component.
   import Button from '$lib/components/Button.svelte';
 
+  // These are variables which are bound to the inputs the user uses
+  // This allows me to access what the user has typed at any time.
   let textInput: string;
   let moodInput: string;
   let colourInput: string = '#000000';
+
+  // Takes the inputs from the user and adds them to the local storage
+  // 'journalEntries' store if there is no dream journal yet for that date,
+  // and if there is it updates today's date's entry
   function saveEntry() {
+    // Prepare the object to append to the journalEntries local store (it is a
+    // JournalEntry type)
     const entry: JournalEntry = {
       date: formatTimestamp(Date.now()),
       content: textInput,
@@ -33,6 +46,8 @@
     console.log($journalEntries);
   }
 
+  // When the application is loaded, this checks if there's already an entry for
+  // today's date. If so, it loads it in (there can only be one entry per day)
   onMount(() => {
     const matchingIndex = $journalEntries.findIndex(
       (entry) => entry.date === formatTimestamp(Date.now())
@@ -53,11 +68,13 @@
         class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
       />
     {/if}
+    <!-- Notice the 'bind:value' attribute. This is what connects the 
+    'textInput' variable to the value of the textarea.-->
     <textarea
+      bind:value={textInput}
       class="w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none focus:ring-0"
       placeholder="Start typing what you dreamed..."
       id="main"
-      bind:value={input}
     />
     <div class="  flex h-20 w-full items-center justify-between px-4">
       <div class="flex items-center gap-2">
