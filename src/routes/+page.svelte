@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Button from '$lib/components/Button.svelte';
+
   let textInput: string;
   let moodInput: string;
   let colourInput: string = '#000000';
