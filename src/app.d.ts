@@ -10,3 +10,9 @@ declare global {
 }
 
 export {};
+export interface JournalEntry {
+  date: string;
+  content: string;
+  mood: string;
+  colour: string;
+}
