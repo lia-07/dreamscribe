@@ -1,5 +1,7 @@
 <script lang="ts">
-  let input: string;
+  let textInput: string;
+  let moodInput: string;
+  let colourInput: string = '#000000';
 </script>
 
 <div class="flex h-screen w-full">
