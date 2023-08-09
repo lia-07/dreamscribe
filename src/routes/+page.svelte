@@ -13,6 +13,32 @@
       id="main"
       bind:value={input}
     />
+    <div class="  flex h-20 w-full items-center justify-between px-4">
+      <div class="flex items-center gap-2">
+        <label for="mood">Mood:</label>
+        <select
+          bind:value={moodInput}
+          name="mood"
+          id="mood"
+          class="btn-secondary fo h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
+        >
+          <option value="" selected disabled>Select a mood</option>
+          <option value="Happy">Happy</option>
+          <option value="Sad">Sad</option>
+          <option value="Anxious">Anxious</option>
+          <option value="Scary">Scary</option>
+          <option value="Nostalgic">Nostalgic</option>
+          <option value="Crazy">Crazy</option>
+        </select>
+        <label for="colour" class="pl-2">Colour:</label>
+        <input
+          bind:value={colourInput}
+          type="color"
+          name="colour"
+          id="colour"
+          class="btn-secondary h-8 rounded-md px-2 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
+        />
+      </div>
       <Button variant="primary"><span slot="text">Save</span></Button>
     </div>
   </form>
