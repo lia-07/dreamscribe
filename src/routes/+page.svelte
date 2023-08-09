@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import type { JournalEntry } from '../app';
 
   import { journalEntries } from '$lib/stores/journalEntries';
@@ -31,6 +33,16 @@
     console.log($journalEntries);
   }
 
+  onMount(() => {
+    const matchingIndex = $journalEntries.findIndex(
+      (entry) => entry.date === formatTimestamp(Date.now())
+    );
+    if (matchingIndex != -1) {
+      textInput = $journalEntries[matchingIndex].content;
+      moodInput = $journalEntries[matchingIndex].mood;
+      colourInput = moodInput = $journalEntries[matchingIndex].colour;
+    }
+  });
 </script>
 
 <div class="flex h-screen w-full">
