@@ -1,9 +1,36 @@
 <script lang="ts">
+  import type { JournalEntry } from '../app';
+
+  import { journalEntries } from '$lib/stores/journalEntries';
+
+  import { formatTimestamp } from '$lib/scripts/timestamp';
+
   import Button from '$lib/components/Button.svelte';
 
   let textInput: string;
   let moodInput: string;
   let colourInput: string = '#000000';
+  function saveEntry() {
+    const entry: JournalEntry = {
+      date: formatTimestamp(Date.now()),
+      content: textInput,
+      mood: moodInput,
+      colour: colourInput
+    };
+
+    const matchingIndex = $journalEntries.findIndex(
+      (entry) => entry.date === formatTimestamp(Date.now())
+    );
+    if (matchingIndex == -1) {
+      journalEntries.update((entries) => [...entries, entry] as JournalEntry[]);
+    } else {
+      // !!! CURRENTLY BROKEN, WORKING ON A FIX !!!
+      journalEntries[matchingIndex].set();
+    }
+
+    console.log($journalEntries);
+  }
+
 </script>
 
 <div class="flex h-screen w-full">
