@@ -46,6 +46,8 @@
 </script>
 
 <div class="flex h-screen w-full">
+  <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault={() => saveEntry()}>
+    <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
     {#if textInput?.length > 500}
       <div
         class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
