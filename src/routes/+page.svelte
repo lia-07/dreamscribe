@@ -60,8 +60,6 @@
       colourInput = moodInput = $journalEntries[matchingIndex].colour;
     }
   });
-
-  let year = new Date().getFullYear();
 </script>
 
 <div class="flex h-screen w-full">
@@ -115,20 +113,19 @@
     <h1 class="text-cabinet mb-2 pl-2 text-2xl font-bold">Previous entries:</h1>
 
     {#each $journalEntries as journalEntry}
+      {@const currentYear = new Date().getFullYear()}
+      {@const journalEntryDate = journalEntry.date.split(' ')}
+
       <div
         class="group isolate flex h-[5.5rem] w-full items-center gap-2 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
       >
         <div
           class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded bg-base2 text-base03"
         >
-          <span class="-mb-2 font-cabinet text-4xl font-bold"
-            >{journalEntry.date.split(' ')[0]}</span
-          >
-          <span
-            class="font-cabinet font-bold"
-            class:text-sm={year != +journalEntry.date.split(' ')[2]}
-            >{journalEntry.date.split(' ')[1]}{year != +journalEntry.date.split(' ')[2]
-              ? " '" + journalEntry.date.split(' ')[2].slice(2)
+          <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
+          <span class="font-cabinet font-bold" class:text-sm={currentYear != +journalEntryDate[2]}
+            >{journalEntryDate[1]}{currentYear != +journalEntryDate[2]
+              ? " '" + journalEntryDate[2].slice(2)
               : ''}</span
           >
         </div>
