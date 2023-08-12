@@ -85,7 +85,7 @@
           bind:value={moodInput}
           name="mood"
           id="mood"
-          class="btn-secondary fo h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
+          class="btn-secondary h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
         >
           <option value="" selected disabled>Select a mood</option>
           <option value="Happy">Happy</option>
