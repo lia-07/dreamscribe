@@ -39,8 +39,10 @@
     if (matchingIndex == -1) {
       journalEntries.update((entries) => [entry, ...entries] as JournalEntry[]);
     } else {
-      // !!! CURRENTLY BROKEN, WORKING ON A FIX !!!
-      journalEntries[matchingIndex].set();
+      journalEntries.update((entries) => {
+        entries[matchingIndex] = entry;
+        return entries;
+      });
     }
 
     console.log($journalEntries);
