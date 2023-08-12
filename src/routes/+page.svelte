@@ -37,7 +37,7 @@
       (entry) => entry.date === formatTimestamp(Date.now())
     );
     if (matchingIndex == -1) {
-      journalEntries.update((entries) => [...entries, entry] as JournalEntry[]);
+      journalEntries.update((entries) => [entry, ...entries] as JournalEntry[]);
     } else {
       // !!! CURRENTLY BROKEN, WORKING ON A FIX !!!
       journalEntries[matchingIndex].set();
