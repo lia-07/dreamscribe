@@ -21,6 +21,20 @@
 
 body {
   @apply scroll-smooth bg-base03 text-base3;
+
+  ::-webkit-scrollbar {
+    @apply w-2 opacity-20;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-sm bg-base2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-base03;
+  }
+
+  scrollbar-color: #fdf6e3 #002b36;
 }
 
 select {
@@ -31,6 +45,17 @@ select {
   padding-right: 2.5rem;
 
   appearance: none;
+}
+
+@layer base {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 @layer utilities {
