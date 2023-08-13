@@ -25,7 +25,6 @@
   let textInput: string;
   let moodInput: string;
 
-
   // Takes the inputs from the user and adds them to the local storage
   // 'journalEntries' store if there is no dream journal yet for that date,
   // and if there is it updates today's date's entry
@@ -109,21 +108,23 @@
     </div>
   </form>
   <div
-    class="flex h-full w-80 flex-col overflow-y-auto pt-16 opacity-50 transition-all duration-200 hover:opacity-90"
+    class="no-scrollbar flex h-full w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-20 opacity-50 transition-all duration-200 hover:opacity-90"
   >
-    <h1 class="text-cabinet mb-2 pl-2 text-2xl font-bold">Previous entries:</h1>
-
+    {#if $journalEntries.length > 0}
+      <h1 class="text-cabinet mb-2 pl-2 text-2xl font-bold">
+        Journal {$journalEntries.length == 1 ? 'Entry' : 'Entries'}:
+      </h1>
+    {/if}
     {#each $journalEntries as journalEntry}
-      {@const currentYear = new Date().getFullYear()}
       {@const journalEntryDate = journalEntry.date.split(' ')}
       {@const currentYear = $currentDate.split(' ')[2]}
 
       <div
         transition:slide
-        class="group isolate flex h-[5.5rem] w-full items-center gap-2 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
+        class="group relative isolate flex h-[5.5rem] w-full gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
       >
         <div
-          class="flex h-16 w-16 shrink-0 flex-col items-center justify-center rounded bg-base2 text-base03"
+          class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
         >
           <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
           <span class="font-cabinet font-bold" class:text-sm={currentYear != +journalEntryDate[2]}
@@ -132,10 +133,13 @@
               : ''}</span
           >
         </div>
-        <p class=" -mt-0.5 line-clamp-3 text-ellipsis text-base3">
+        <p class=" line-clamp-3 text-ellipsis text-base3">
           {journalEntry.content}
         </p>
       </div>
     {/each}
+    <div
+      class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
+    />
   </div>
 </div>
