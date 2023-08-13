@@ -128,8 +128,8 @@
           class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
         >
           <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
-          <span class="font-cabinet font-bold" class:text-sm={currentYear != +journalEntryDate[2]}
-            >{journalEntryDate[1]}{currentYear != +journalEntryDate[2]
+          <span class="font-cabinet font-bold" class:text-sm={currentYear != journalEntryDate[2]}
+            >{journalEntryDate[1]}{currentYear != journalEntryDate[2]
               ? " '" + journalEntryDate[2].slice(2)
               : ''}</span
           >
