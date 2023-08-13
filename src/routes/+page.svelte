@@ -120,8 +120,9 @@
       {@const journalEntryDate = journalEntry.date.split(' ')}
       {@const currentYear = $currentDate.split(' ')[2]}
 
-      <div
+      <a
         transition:slide
+        href={journalEntry.date}
         class="group relative isolate flex h-[5.5rem] w-full gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
       >
         <div
@@ -137,7 +138,7 @@
         <p class=" line-clamp-3 text-ellipsis text-base3">
           {journalEntry.content}
         </p>
-      </div>
+      </a>
     {/each}
     <div
       class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
