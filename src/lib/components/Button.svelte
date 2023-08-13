@@ -1,12 +1,21 @@
 <script lang="ts">
-  // This lets the parent component of the button specify which button
-  // variant to use.
+  // Allows us to 'dispatch' an event to the parent component
+  import { createEventDispatcher } from 'svelte';
+
+  // Initialise the event dispatcher
+  const dispatch = createEventDispatcher();
+
+  // This lets the parent component of the button specify which button variant
+  // to use.
   export let variant: 'primary' | 'secondary' | 'destructive' | 'disabled';
 </script>
 
 <!-- The 'class:' attribute is special Svelte syntax that allows CSS classes to 
 be applied if a certain condition is met -->
+<!-- The 'on:click' part makes it so when the button is clicked, it sends a
+message to the parent component saying it's been clicked -->
 <button
+  on:click={() => dispatch('buttonClick')}
   class:btn-primary={variant == 'primary'}
   class:btn-secondary={variant == 'secondary'}
   class:btn-destructive={variant == 'destructive'}

@@ -63,7 +63,7 @@
 </script>
 
 <div class="flex h-screen w-full">
-  <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault={() => saveEntry()}>
+  <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
     <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
     {#if textInput?.length > 500}
       <div
@@ -104,7 +104,12 @@
           class="btn-secondary h-8 rounded-md px-2 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
         />
       </div>
-      <Button variant="primary"><span slot="text">Save</span></Button>
+      <Button
+        variant={textInput ? 'primary' : 'disabled'}
+        on:buttonClick={() => {
+          if (textInput) saveEntry();
+        }}><span slot="text">Save</span></Button
+      >
     </div>
   </form>
   <div
