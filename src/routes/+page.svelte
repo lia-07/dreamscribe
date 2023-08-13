@@ -11,6 +11,9 @@
   // Import my journal entry array, which is saved in a local storage store.
   import { journalEntries } from '$lib/stores/journalEntries';
 
+  // Import my universal store for the current date
+  import { currentDate } from '$lib/stores/currentDate';
+
   // Import my timestamp formatter function
   import { formatTimestamp } from '$lib/scripts/timestamp';
 
@@ -30,13 +33,13 @@
     // Prepare the object to append to the journalEntries local store (it is a
     // JournalEntry type)
     const entry: JournalEntry = {
-      date: formatTimestamp(Date.now()),
+      date: $currentDate,
       content: textInput,
       mood: moodInput
     };
 
     const matchingIndex = $journalEntries.findIndex(
-      (entry) => entry.date === formatTimestamp(Date.now())
+      (journalEntry) => journalEntry.date === $currentDate
     );
     if (matchingIndex == -1) {
       journalEntries.update((entries) => [entry, ...entries] as JournalEntry[]);
@@ -54,7 +57,7 @@
   // today's date. If so, it loads it in (there can only be one entry per day)
   onMount(() => {
     const matchingIndex = $journalEntries.findIndex(
-      (entry) => entry.date === formatTimestamp(Date.now())
+      (journalEntry) => journalEntry.date === $currentDate
     );
     if (matchingIndex != -1) {
       textInput = $journalEntries[matchingIndex].content;
@@ -113,6 +116,7 @@
     {#each $journalEntries as journalEntry}
       {@const currentYear = new Date().getFullYear()}
       {@const journalEntryDate = journalEntry.date.split(' ')}
+      {@const currentYear = $currentDate.split(' ')[2]}
 
       <div
         transition:slide
