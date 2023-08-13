@@ -18,9 +18,6 @@
   // Import my universal store for the current date
   import { currentDate } from '$lib/stores/currentDate';
 
-  // Import my timestamp formatter function
-  import { formatTimestamp } from '$lib/scripts/timestamp';
-
   // Import my button component.
   import Button from '$lib/components/Button.svelte';
 
