@@ -66,7 +66,7 @@
   });
 </script>
 
-<div class="flex h-screen w-full">
+<main class="flex h-screen w-full gap-2">
   <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
     <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
     {#if textInput?.length > 500}
@@ -108,7 +108,7 @@
       >
     </div>
   </form>
-  <div
+  <aside
     class="no-scrollbar flex h-full w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-20 opacity-50 transition-all duration-200 hover:opacity-90"
   >
     {#if $journalEntries.length > 0}
@@ -142,5 +142,5 @@
     <div
       class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
     />
-  </div>
-</div>
+  </aside>
+</main>
