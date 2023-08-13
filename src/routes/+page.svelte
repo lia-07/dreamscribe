@@ -5,6 +5,9 @@
   // Import the JournalEntry type
   import type { JournalEntry } from '../app';
 
+  // Imports a cool transition
+  import { slide } from 'svelte/transition';
+
   // Import my journal entry array, which is saved in a local storage store.
   import { journalEntries } from '$lib/stores/journalEntries';
 
@@ -112,6 +115,7 @@
       {@const journalEntryDate = journalEntry.date.split(' ')}
 
       <div
+        transition:slide
         class="group isolate flex h-[5.5rem] w-full items-center gap-2 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
       >
         <div
