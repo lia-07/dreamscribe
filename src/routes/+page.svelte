@@ -5,6 +5,10 @@
   // Import the JournalEntry type
   import type { JournalEntry } from '../app';
 
+  // Get the data from '+page.ts'
+  import type { PageData } from './$types';
+  export let data: PageData;
+
   // Imports a cool transition
   import { slide } from 'svelte/transition';
 
@@ -55,12 +59,9 @@
   // When the application is loaded, this checks if there's already an entry for
   // today's date. If so, it loads it in (there can only be one entry per day)
   onMount(() => {
-    const matchingIndex = $journalEntries.findIndex(
-      (journalEntry) => journalEntry.date === $currentDate
-    );
-    if (matchingIndex != -1) {
-      textInput = $journalEntries[matchingIndex].content;
-      moodInput = $journalEntries[matchingIndex].mood;
+    if (data.journalEntry) {
+      textInput = data.journalEntry.content;
+      moodInput = data.journalEntry.mood;
     }
   });
 </script>
