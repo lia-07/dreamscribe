@@ -18,7 +18,7 @@
   // This allows me to access what the user has typed at any time.
   let textInput: string;
   let moodInput: string;
-  let colourInput: string = '#000000';
+
 
   // Takes the inputs from the user and adds them to the local storage
   // 'journalEntries' store if there is no dream journal yet for that date,
@@ -29,8 +29,7 @@
     const entry: JournalEntry = {
       date: formatTimestamp(Date.now()),
       content: textInput,
-      mood: moodInput,
-      colour: colourInput
+      mood: moodInput
     };
 
     const matchingIndex = $journalEntries.findIndex(
@@ -57,7 +56,6 @@
     if (matchingIndex != -1) {
       textInput = $journalEntries[matchingIndex].content;
       moodInput = $journalEntries[matchingIndex].mood;
-      colourInput = moodInput = $journalEntries[matchingIndex].colour;
     }
   });
 </script>
@@ -95,14 +93,6 @@
           <option value="Nostalgic">Nostalgic</option>
           <option value="Crazy">Crazy</option>
         </select>
-        <label for="colour" class="pl-2">Colour:</label>
-        <input
-          bind:value={colourInput}
-          type="color"
-          name="colour"
-          id="colour"
-          class="btn-secondary h-8 rounded-md px-2 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
-        />
       </div>
       <Button
         variant={textInput ? 'primary' : 'disabled'}
