@@ -9,8 +9,8 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
-  // Imports a cool transition
-  import { slide } from 'svelte/transition';
+  // Import some cool transitions
+  import { slide, fade } from 'svelte/transition';
 
   // Import my journal entry array, which is saved in a local storage store.
   import { journalEntries } from '$lib/stores/journalEntries';
@@ -25,6 +25,21 @@
   // This allows me to access what the user has typed at any time.
   let textInput: string;
   let moodInput: string;
+
+  let showFadeOnTextArea = false;
+
+  function showTheFade() {
+    const textarea = document.getElementById('mainTextarea');
+    const showOnPx = 150; // Change this value if needed
+
+    if (!textarea) return;
+
+    if (textarea.scrollTop > showOnPx) {
+      showFadeOnTextArea = true;
+    } else {
+      showFadeOnTextArea = false;
+    }
+  }
 
   // Takes the inputs from the user and adds them to the local storage
   // 'journalEntries' store if there is no dream journal yet for that date,
@@ -66,8 +81,9 @@
 <main class="flex h-screen w-full gap-2">
   <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
     <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
-    {#if textInput?.length > 500}
+    {#if showFadeOnTextArea}
       <div
+        transition:fade
         class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
       />
     {/if}
@@ -75,10 +91,12 @@
     'textInput' variable to the value of the textarea.-->
     <textarea
       bind:value={textInput}
+      on:scroll={showTheFade}
       class="w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none focus:ring-0"
       placeholder="Start typing what you dreamed..."
-      id="main"
+      id="mainTextarea"
     />
+
     <div class="  flex h-20 w-full items-center justify-between px-4">
       <div class="flex items-center gap-2">
         <label for="mood">Mood:</label>
