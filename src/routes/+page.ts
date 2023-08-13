@@ -1,5 +1,4 @@
 import type { PageLoad } from './$types';
-import type { JournalEntry } from '../app';
 
 import { get } from 'svelte/store';
 import { journalEntries } from '$lib/stores/journalEntries';
