@@ -9,8 +9,8 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
-  // Import some cool transitions
-  import { slide, fade } from 'svelte/transition';
+  // Import a cool transition
+  import { fade } from 'svelte/transition';
 
   // Import my journal entry array, which is saved in a local storage store.
   import { journalEntries } from '$lib/stores/journalEntries';
@@ -78,85 +78,56 @@
   });
 </script>
 
-<main class="flex h-screen w-full gap-2">
-  <form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
-    <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
-    {#if showFadeOnTextArea}
-      <div
-        transition:fade
-        class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
-      />
-    {/if}
-    <!-- Notice the 'bind:value' attribute. This is what connects the 
-    'textInput' variable to the value of the textarea.-->
-    <textarea
-      bind:value={textInput}
-      on:scroll={showTheFade}
-      class="w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none focus:ring-0"
-      placeholder="Start typing what you dreamed..."
-      id="mainTextarea"
-    />
-
-    <div class="  flex h-20 w-full items-center justify-between px-4">
-      <div class="flex items-center gap-2">
-        <label for="mood">Mood:</label>
-        <select
-          bind:value={moodInput}
-          name="mood"
-          id="mood"
-          class="btn-secondary h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
-        >
-          <option value="" selected disabled>Select a mood</option>
-          <option value="Happy">Happy</option>
-          <option value="Sad">Sad</option>
-          <option value="Anxious">Anxious</option>
-          <option value="Scary">Scary</option>
-          <option value="Nostalgic">Nostalgic</option>
-          <option value="Crazy">Crazy</option>
-        </select>
-      </div>
-      <Button
-        variant={textInput ? 'primary' : 'disabled'}
-        on:buttonClick={() => {
-          if (textInput) saveEntry();
-        }}><span slot="text">Save</span></Button
-      >
-    </div>
-  </form>
-  <aside
-    class="no-scrollbar flex h-full w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-20 opacity-50 transition-all duration-200 hover:opacity-90"
-  >
-    {#if $journalEntries.length > 0}
-      <h1 class="text-cabinet mb-2 pl-2 text-2xl font-bold">
-        Journal {$journalEntries.length == 1 ? 'Entry' : 'Entries'}:
-      </h1>
-    {/if}
-    {#each $journalEntries as journalEntry}
-      {@const journalEntryDate = journalEntry.date.split(' ')}
-      {@const currentYear = $currentDate.split(' ')[2]}
-
-      <a
-        transition:slide
-        href={journalEntry.date}
-        class="group relative isolate flex h-[5.5rem] w-full gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-100 active:scale-95"
-      >
-        <div
-          class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
-        >
-          <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
-          <span class="font-cabinet font-bold" class:text-sm={currentYear != journalEntryDate[2]}
-            >{journalEntryDate[1]}{currentYear != journalEntryDate[2]
-              ? " '" + journalEntryDate[2].slice(2)
-              : ''}</span
-          >
-        </div>
-        <p class=" line-clamp-3 text-ellipsis text-base3">
-          {journalEntry.content}
-        </p>
-      </a>
-    {/each}
+<form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
+  <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
+  {#if showFadeOnTextArea}
     <div
-      class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
+      transition:fade
+      class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
     />
-  </aside>
-</main>
+  {/if}
+  <!-- Notice the 'bind:value' attribute. This is what connects the 
+    'textInput' variable to the value of the textarea.-->
+
+  <div
+    bind:innerHTML={textInput}
+    on:scroll={showTheFade}
+    class="w-full max-w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none focus:ring-0"
+    placeholder="Start typing what you dreamed..."
+    id="mainTextarea"
+    contenteditable
+  />
+
+  <div class="  flex h-20 w-full items-center justify-between px-4">
+    <div class="flex items-center gap-2">
+      <label for="mood">Mood:</label>
+      <select
+        bind:value={moodInput}
+        name="mood"
+        id="mood"
+        class="btn-secondary h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
+      >
+        <option value="" selected disabled>Select a mood</option>
+        <option value="Happy">Happy</option>
+        <option value="Sad">Sad</option>
+        <option value="Anxious">Anxious</option>
+        <option value="Scary">Scary</option>
+        <option value="Nostalgic">Nostalgic</option>
+        <option value="Crazy">Crazy</option>
+      </select>
+    </div>
+    <Button
+      variant={textInput ? 'primary' : 'disabled'}
+      on:buttonClick={() => {
+        if (textInput) saveEntry();
+      }}
+      ><span slot="icon"
+        ><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"
+          ><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path
+            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"
+          /></svg
+        >
+      </span><span slot="text">Save</span></Button
+    >
+  </div>
+</form>
