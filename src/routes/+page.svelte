@@ -33,7 +33,7 @@
 
   function showTheFade() {
     const textarea = document.getElementById('mainTextarea');
-    const showOnPx = 150; // Change this value if needed
+    const showOnPx = 50;
 
     if (!textarea) return;
 
@@ -85,27 +85,26 @@
   <title>dreamscribe</title>
 </svelte:head>
 
-<form class="relative flex h-full flex-1 flex-col" on:submit|preventDefault>
+<form class="relative flex h-screen flex-1 flex-col" on:submit|preventDefault>
   <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
   {#if showFadeOnTextArea}
     <div
       transition:fade
-      class=" pointer-events-none absolute inset-0 h-80 w-full bg-gradient-to-b from-base03 to-transparent"
+      class="pointer-events-none absolute left-0 top-0 z-40 h-60 w-full bg-gradient-to-b from-base03 to-transparent"
     />
   {/if}
   <!-- Notice the 'bind:value' attribute. This is what connects the 
     'textInput' variable to the value of the textarea.-->
 
-  <div
-    bind:innerHTML={textInput}
+  <textarea
+    bind:value={textInput}
     on:scroll={showTheFade}
-    class="w-full max-w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none focus:ring-0"
+    class="w-full max-w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none placeholder:text-base1 focus:ring-0"
     placeholder="Start typing what you dreamed..."
     id="mainTextarea"
-    contenteditable
   />
 
-  <div class="  flex h-20 w-full items-center justify-between px-4">
+  <div class=" flex h-20 w-full items-center justify-between px-4">
     <div class="flex items-center gap-2">
       <label for="mood">Mood:</label>
       <select

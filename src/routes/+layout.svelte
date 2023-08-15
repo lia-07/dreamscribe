@@ -15,14 +15,25 @@
   import Icon from '$lib/assets/Icon.svelte';
 </script>
 
+<div class="flex flex-col">
+  <header
+    class="absolute inset-0 z-50 flex h-16 items-center border-b border-base01/50 bg-base03/50 backdrop-blur-sm"
+  >
+    <div class="mx-auto px-4 md:container">
+      <a href="/" class="flex h-16 w-fit items-center gap-2">
+        <h1 class="font-cabinet text-2xl">dreamscribe</h1>
         <Icon name="feather" class="h-5 w-5 fill-base2 " />
       </a>
+    </div>
+  </header>
+
+  <main class="mx-auto flex h-screen w-full flex-1 gap-3 md:container">
     <slot />
     <aside
-      class="no-scrollbar flex h-full w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-20 opacity-75 transition-all duration-200 hover:opacity-100"
+      class="no-scrollbar flex h-screen w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-28 opacity-50 transition-all duration-200 hover:opacity-100"
     >
       {#if $journalEntries.length > 0}
-        <h1 class="text-cabinet mb-2 pl-2 text-2xl font-bold opacity-50 hover:opacity-90">
+        <h1 class="text-cabinet mb-1 pl-2 text-2xl font-bold opacity-90">
           Journal {$journalEntries.length == 1 ? 'Entry' : 'Entries'}:
         </h1>
       {/if}
@@ -33,7 +44,7 @@
         <a
           transition:slide
           href={journalEntry.date == $currentDate ? '/' : journalEntry.date}
-          class="active-journal-entry group relative isolate flex h-fit w-full gap-3 rounded-md p-2 opacity-50 transition-all hover:bg-base02 hover:opacity-90 active:scale-95"
+          class="active-journal-entry group relative isolate flex h-fit w-full gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-90 active:scale-95"
         >
           <div
             class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
