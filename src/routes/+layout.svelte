@@ -10,10 +10,13 @@
 
   // Import my universal store for the current date
   import { currentDate } from '$lib/stores/currentDate';
+
+  // Import my icon file
+  import Icon from '$lib/assets/Icon.svelte';
 </script>
 
-<div class="mx-auto md:container">
-  <main class="flex h-screen w-full gap-3">
+        <Icon name="feather" class="h-5 w-5 fill-base2 " />
+      </a>
     <slot />
     <aside
       class="no-scrollbar flex h-full w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-20 opacity-75 transition-all duration-200 hover:opacity-100"
