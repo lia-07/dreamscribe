@@ -5,6 +5,7 @@
 
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/assets/Icon.svelte';
+  import { journalEntries } from '$lib/stores/journalEntries';
 
   let jsonData = {
     date: data.journalEntry.date,
@@ -12,6 +13,7 @@
     text: data.journalEntry.content
   };
 
+  // this function downloads the dream journal as JSON
   function downloadJson() {
     const jsonDataStr = JSON.stringify(jsonData, null, 2);
     const blob = new Blob([jsonDataStr], { type: 'application/json' });
@@ -19,14 +21,22 @@
     const a = document.createElement('a');
     a.href = url;
 
-    // Specify the desired filename here
     a.download = `${data.journalEntry.date} - dreamscribe`;
 
-    // Trigger the download
     a.click();
 
-    // Clean up the URL object
     URL.revokeObjectURL(url);
+  }
+
+  // deletes the current entry and sends the user home
+  function deleteEntry() {
+    const matchingIndex = $journalEntries.findIndex(
+      (journalEntry) => journalEntry.date === data.journalEntry.date
+    );
+    const entries = journalEntries.update((existingEntries) => {
+      return existingEntries.filter((entry, i) => i !== matchingIndex);
+    });
+    window.location.href = '/';
   }
 </script>
 
@@ -54,7 +64,7 @@
       <span slot="icon"><Icon name="download" /></span>
       <span slot="text">Download</span>
     </Button>
-    <Button variant="primary">
+    <Button variant="primary" on:buttonClick={deleteEntry}>
       <span slot="icon"><Icon name="trash" /></span>
       <span slot="text">Delete</span>
     </Button>
