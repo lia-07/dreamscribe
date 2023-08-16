@@ -1,7 +1,17 @@
 <script lang="ts">
   // All icons are from FontAwesome free: https://fontawesome.com
 
-  export let name: 'feather' | 'bomb' | 'trash' | 'floppy' | 'download' | 'list';
+  export let name:
+    | 'feather'
+    | 'bomb'
+    | 'trash'
+    | 'floppy'
+    | 'download'
+    | 'list'
+    | 'x'
+    | 'warning'
+    | 'house'
+    | 'arrow-left';
   export let sizeInRem: number = 1;
 
   const icons = [
