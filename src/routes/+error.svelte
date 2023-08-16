@@ -5,9 +5,13 @@
   import Button from '$lib/components/Button.svelte';
 </script>
 
+<svelte:head>
+  <title>Error {$page.status} | dreamscribe</title>
+</svelte:head>
+
 <div class="flex h-full flex-1 flex-col justify-center px-4">
   <div>
-    <h1 class="flex items-center gap-2 font-cabinet text-4xl font-bold opacity-80">
+    <h1 class="flex items-center gap-2 font-cabinet text-4xl font-bold opacity-90">
       <Icon name="warning" sizeInRem={1.8} /> Error {$page.status}
     </h1>
     <p class="font-supreme text-xl">{$page.error?.message}</p>
