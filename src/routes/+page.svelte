@@ -29,11 +29,14 @@
   let textInput: string;
   let moodInput: string;
 
+  // The below code that shows the fade on the textarea to make it look more
+  // smooth. I did plan on adding one on the bottom side as well but it caused
+  // unexpected issue.
   let showFadeOnTextArea = false;
 
   function showTheFade() {
     const textarea = document.getElementById('mainTextarea');
-    const showOnPx = 50;
+    const showOnPx = 20;
 
     if (!textarea) return;
 
@@ -86,7 +89,8 @@
 </svelte:head>
 
 <form class="relative flex h-screen flex-1 flex-col" on:submit|preventDefault>
-  <!-- If the length of all the text typed (in characters) is over 500, show the smooth gradient -->
+  <!-- This is the fade thing I talked about above the declaration of the 
+  'showFadeOnTextArea' variable and 'showTheFade' function-->
   {#if showFadeOnTextArea}
     <div
       transition:fade
@@ -95,16 +99,15 @@
   {/if}
   <!-- Notice the 'bind:value' attribute. This is what connects the 
     'textInput' variable to the value of the textarea.-->
-
   <textarea
     bind:value={textInput}
     on:scroll={showTheFade}
-    class="w-full max-w-full flex-1 resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none placeholder:text-base1 focus:ring-0"
+    class="h-full w-full max-w-full resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none placeholder:text-base1 focus:ring-0"
     placeholder="Start typing what you dreamed..."
     id="mainTextarea"
   />
 
-  <div class=" flex h-20 w-full items-center justify-between px-4">
+  <div class=" flex w-full items-center justify-between border-t border-base01/50 px-4 pb-4 pt-2">
     <div class="flex items-center gap-2">
       <label for="mood">Mood:</label>
       <select
