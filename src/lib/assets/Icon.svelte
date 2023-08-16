@@ -31,12 +31,12 @@
     }
   ] as const;
 
-  let icon = icons.find((e) => e.name === name);
+  let icon = icons.find((e) => e.name === name) as { name: string; svg: string; viewBox?: string };
 </script>
 
 <svg
   class={$$props.class}
   width={sizeInRem + 'rem'}
   height={sizeInRem + 'rem'}
-  viewBox="0 0 512 512">{@html icon?.svg}</svg
+  viewBox="0 0 {icon.viewBox !== undefined ? icon.viewBox : '512 512'}">{@html icon?.svg}</svg
 >
