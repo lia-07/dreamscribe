@@ -2,6 +2,7 @@
   // All icons are from FontAwesome free: https://fontawesome.com
 
   export let name: 'feather' | 'bomb' | 'trash' | 'floppy' | 'download' | 'list';
+  export let sizeInRem: number = 1;
 
   const icons = [
     {
@@ -33,4 +34,9 @@
   let icon = icons.find((e) => e.name === name);
 </script>
 
-<svg class={$$props.class} viewBox="0 0 512 512">{@html icon?.svg}</svg>
+<svg
+  class={$$props.class}
+  width={sizeInRem + 'rem'}
+  height={sizeInRem + 'rem'}
+  viewBox="0 0 512 512">{@html icon?.svg}</svg
+>

@@ -126,10 +126,7 @@
       variant={textInput ? 'primary' : 'disabled'}
       on:buttonClick={() => {
         if (textInput) saveEntry();
-      }}
-      ><span slot="icon"><Icon name="floppy" class="h-4 w-4 fill-base03" /></span><span slot="text"
-        >Save</span
-      ></Button
+      }}><span slot="icon"><Icon name="floppy" /></span><span slot="text">Save</span></Button
     >
   </div>
 </form>

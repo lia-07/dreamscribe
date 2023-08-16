@@ -22,7 +22,7 @@
     <div class="mx-auto px-4 md:container">
       <a href="/" class="flex h-16 w-fit items-center gap-2">
         <h1 class="font-cabinet text-2xl">dreamscribe</h1>
-        <Icon name="feather" class="h-5 w-5 fill-base2 " />
+        <Icon name="feather" sizeInRem={1.25} class=" fill-base2 " />
       </a>
     </div>
   </header>
