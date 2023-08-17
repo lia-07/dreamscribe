@@ -7,35 +7,56 @@
   import Icon from '$lib/assets/Icon.svelte';
   import { journalEntries } from '$lib/stores/journalEntries';
 
-  let jsonData = {
-    date: data.journalEntry.date,
-    mood: data.journalEntry.mood,
-    text: data.journalEntry.content
-  };
-
-  // this function downloads the dream journal as JSON
+  // downloads the dream journal as JSON
   function downloadJson() {
-    const jsonDataStr = JSON.stringify(jsonData, null, 2);
+    // get the data about the current entry, and format it as a JSON string
+    const jsonDataStr = JSON.stringify(
+      {
+        date: data.journalEntry.date,
+        mood: data.journalEntry.mood,
+        text: data.journalEntry.content
+      },
+      null,
+      2
+    );
+
+    // make it JSON
     const blob = new Blob([jsonDataStr], { type: 'application/json' });
+
+    // create a temporary url for the object
     const url = URL.createObjectURL(blob);
+
+    // make a temporary invisible link element
     const a = document.createElement('a');
+
+    // set the href of our temporary invisible link element to the url from
+    // before
     a.href = url;
 
+    // tells the browser that the file is meant to be downloaded instead of
+    // shown, and sets the file name (it'll be like '17 Aug 2023 - dreamscribe.json')
     a.download = `${data.journalEntry.date} - dreamscribe`;
 
+    // "click" on our temporary invisible link
     a.click();
 
+    // clean up
     URL.revokeObjectURL(url);
   }
 
   // deletes the current entry and sends the user home
   function deleteEntry() {
+    // find the numerical index of the entry to delete
     const matchingIndex = $journalEntries.findIndex(
       (journalEntry) => journalEntry.date === data.journalEntry.date
     );
-    const entries = journalEntries.update((existingEntries) => {
+
+    // delete that entry
+    journalEntries.update((existingEntries) => {
       return existingEntries.filter((entry, i) => i !== matchingIndex);
     });
+
+    // send the user home
     window.location.href = '/';
   }
 </script>
@@ -45,7 +66,7 @@
 </svelte:head>
 <article class="relative flex h-full flex-col">
   <div class="flex-1 overflow-y-auto pb-16 pl-4 pr-8 pt-32">
-    <hgroup class="relative mb-4 flex w-full flex-col gap-2 font-cabinet opacity-80">
+    <hgroup class=" mb-4 flex w-full flex-col gap-1 font-cabinet opacity-90">
       <h1 class=" text-4xl font-bold">
         {data.journalEntry?.date}
       </h1>

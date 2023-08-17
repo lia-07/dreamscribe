@@ -18,11 +18,16 @@
 <header
   class="fixed inset-0 z-50 flex h-16 items-center border-b border-base01/50 bg-base03/50 backdrop-blur-sm"
 >
-  <div class="mx-auto px-4 md:container">
+  <div class="mx-auto flex items-center justify-between gap-2 px-4 md:container">
     <a href="/" class="flex h-16 w-fit items-center gap-2">
       <h1 class="font-cabinet text-2xl">dreamscribe</h1>
       <Icon name="feather" sizeInRem={1.25} class=" fill-base2 " />
     </a>
+    <div>
+      <a href="/privacy" class="text-sm opacity-50 transition-all hover:underline hover:opacity-100"
+        >Privacy</a
+      >
+    </div>
   </div>
 </header>
 <div class="mx-auto flex h-screen gap-3 md:container">
