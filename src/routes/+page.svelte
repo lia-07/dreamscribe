@@ -35,11 +35,18 @@
   let showFadeOnTextArea = false;
 
   function showTheFade() {
+    // select the textarea
     const textarea = document.getElementById('mainTextarea');
+
+    // define the number of pixels the user has to scroll for the fade to be
+    // shown
     const showOnPx = 20;
 
+    // if the textarea doesn't exist, return nothing from the function
     if (!textarea) return;
 
+    // if the user has scrolled on the textarea more than the showOnPx variable
+    // we declared before, show the fade
     if (textarea.scrollTop > showOnPx) {
       showFadeOnTextArea = true;
     } else {
@@ -59,19 +66,25 @@
       mood: moodInput
     };
 
+    // find, if any, the index of the journalEntries persisted store that
+    // the current date.
     const matchingIndex = $journalEntries.findIndex(
       (journalEntry) => journalEntry.date === $currentDate
     );
+
+    // if a journal entry for today's date already exists, update it with the
+    // new values. Otherwise, make a new one.
     if (matchingIndex == -1) {
       journalEntries.update((entries) => [entry, ...entries] as JournalEntry[]);
+      console.log(`Saved a new journal entry for ${entry.date}`);
     } else {
       journalEntries.update((entries) => {
         entries[matchingIndex] = entry;
+        console.log(`Updated the journal entry for ${entry.date}`);
+
         return entries;
       });
     }
-
-    console.log($journalEntries);
   }
 
   // When the application is loaded, this checks if there's already an entry for
@@ -84,7 +97,10 @@
   });
 </script>
 
+<!-- <svelte:head> tags allows us to insert data into the <head> tag of the html
+     that may change on a page to page basis, like the title -->
 <svelte:head>
+  <!-- Sets the title for the home page -->
   <title>dreamscribe</title>
 </svelte:head>
 
@@ -107,8 +123,11 @@
     id="mainTextarea"
   />
 
+  <!-- The bottom row -->
   <div class=" flex w-full items-center justify-between border-t border-base01/50 px-4 pb-4 pt-2">
     <div class="flex items-center gap-2">
+      <!-- The mood selector. the select element is bound to the 'moodInput'
+      variable -->
       <label for="mood">Mood:</label>
       <select
         bind:value={moodInput}
@@ -116,7 +135,10 @@
         id="mood"
         class="btn-secondary h-8 rounded-md pl-3 transition-all focus:scale-90 focus:opacity-80 focus:outline-none"
       >
+        <!-- Placeholder value -->
         <option value="" selected disabled>Select a mood</option>
+
+        <!-- Actual options -->
         <option value="Happy">Happy</option>
         <option value="Sad">Sad</option>
         <option value="Anxious">Anxious</option>
@@ -125,6 +147,10 @@
         <option value="Crazy">Crazy</option>
       </select>
     </div>
+    <!-- This button is disabled if there is nothing in the textInput variable,
+    which is bound to the textArea. If there is something in it, what is in the 
+    textarea will be saved as a new journal entry UNLESS there is already a 
+    journal entry for that date, in which case it will update it -->
     <Button
       variant={textInput ? 'primary' : 'disabled'}
       on:buttonClick={() => {

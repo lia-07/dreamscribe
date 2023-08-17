@@ -1,6 +1,7 @@
 <script lang="ts">
   // All icons are from FontAwesome free: https://fontawesome.com
 
+  // make sure the parent doesn't define an invalid icon
   export let name:
     | 'feather'
     | 'bomb'
@@ -12,8 +13,11 @@
     | 'warning'
     | 'house'
     | 'arrow-left';
+
+  // allow the sizeInRem to be controlled by the parent, defaults to 1
   export let sizeInRem: number = 1;
 
+  // define all my icons
   const icons = [
     {
       name: 'feather',
@@ -61,9 +65,11 @@
     }
   ] as const;
 
+  // select the icon requested by the parent
   let icon = icons.find((e) => e.name === name) as { name: string; svg: string; viewBox?: string };
 </script>
 
+<!-- return the requested icon -->
 <svg
   class={$$props.class}
   width={sizeInRem + 'rem'}

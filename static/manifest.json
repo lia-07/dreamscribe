@@ -1,4 +1,6 @@
 {
+  "COMMENT FOR ANYONE LOOKING": "This file contains essential details so the browser can use this site as a PWA",
+
   "name": "dreamscribe",
   "short_name": "dreamscribe",
   "theme_color": "#002b36",

@@ -17,13 +17,19 @@
   // Import my icon file
   import Icon from '$lib/assets/Icon.svelte';
 
+  // defines if the 'drawer', which contains the previous journal entries, is
+  // currently shown on mobile.
   let drawerShown = false;
+
+  // inverts the 'drawerShown' boolean. For example, if it's true it will be set
+  // to false
   function drawerInvert() {
     drawerShown = drawerShown != true;
     console.log(drawerShown);
   }
 </script>
 
+<!-- Important for the modal(s) -->
 <Modals>
   <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div
@@ -35,6 +41,7 @@
   />
 </Modals>
 
+<!-- The header -->
 <header
   class="fixed inset-0 z-40 flex h-16 items-center border-b border-base01/50 bg-base03/50 backdrop-blur-sm md:h-16"
 >
@@ -44,14 +51,17 @@
       <Icon name="feather" sizeInRem={1.25} class=" fill-base2 " />
     </a>
     <div class="flex items-center gap-8">
-      <a href="/privacy" class="text-sm opacity-50 transition-all hover:underline hover:opacity-100"
-        >Privacy</a
+      <a
+        href="/privacy"
+        class="opacity-50 transition-all hover:underline hover:opacity-100 md:text-sm">Privacy</a
       >
+      <!-- The button that opens the drawer with the dream journal entries.
+      Only shown on mobile -->
       <button
-        class="flex appearance-none opacity-50 transition-all hover:underline hover:opacity-100 md:hidden"
+        class="flex appearance-none pr-2 opacity-50 transition-all hover:underline hover:opacity-100 md:hidden"
         on:click={drawerInvert}
       >
-        <Icon name="list" />
+        <Icon name="list" sizeInRem={1.25} />
       </button>
     </div>
   </div>
@@ -60,6 +70,8 @@
   <main class="h-full flex-1">
     <slot />
   </main>
+
+  <!-- The dream journal entries panel for desktop -->
   <aside
     class="no-scrollbar hidden h-screen w-80 shrink-0 flex-col overflow-y-auto pb-60 pt-28 opacity-50 transition-all duration-200 hover:opacity-100 md:flex"
   >
@@ -92,12 +104,16 @@
         </p>
       </a>
     {/each}
+
+    <!-- If there are more than 7 dream journal entries, show a fade effect
+    at the bottom -->
     {#if $journalEntries.length > 7}
       <div
         class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
       />
     {/if}
   </aside>
+  <!-- The dream journal entries drawer for mobile -->
   {#if drawerShown}
     <div
       class="absolute inset-0 z-50 h-screen w-screen bg-black/50 backdrop-blur-sm"

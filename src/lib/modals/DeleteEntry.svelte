@@ -1,14 +1,24 @@
+<!-- The modal for confirming the user wants to delete their journal entry -->
+
 <script lang="ts">
+  // Allow the modal to be closed
   import { closeModal } from 'svelte-modals';
+
+  // Import the base modal
   import Base from './Base.svelte';
 
+  // Import the journal entries store
   import { journalEntries } from '$lib/stores/journalEntries';
 
+  // Already explained what these do
   import Icon from '$lib/assets/Icon.svelte';
   import Button from '$lib/components/Button.svelte';
 
-  // provided by <Modals />
-  export let isOpen: Boolean;
+  // provided by the Modals package, and lets us know if the modal is open
+  export let isOpen: boolean;
+
+  // provided by [date]/+page.svelte, gives us the date of the currently opened
+  // journal entry
   export let date: string;
 
   // deletes the current entry and sends the user home
@@ -20,6 +30,7 @@
     journalEntries.update((existingEntries) => {
       return existingEntries.filter((entry, i) => i !== matchingIndex);
     });
+    console.log(`Deleted the journal entry for ${date}`);
 
     // send the user home
     window.location.href = '/';

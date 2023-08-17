@@ -3,12 +3,14 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
+  // Allow us to open the modal for confiriming the user wants to delete a
+  // journal entry
   import { openModal } from 'svelte-modals';
   import DeleteEntry from '$lib/modals/DeleteEntry.svelte';
 
+  // Already explained what these do
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/assets/Icon.svelte';
-  import { journalEntries } from '$lib/stores/journalEntries';
 
   // downloads the dream journal as JSON
   function downloadJson() {
@@ -45,18 +47,22 @@
 
     // clean up
     URL.revokeObjectURL(url);
+
+    console.log(`User downloaded the journal entry for ${data.journalEntry.date}`);
   }
 </script>
 
 <svelte:head>
   <title>{data.journalEntry?.date} | dreamscribe</title>
 </svelte:head>
+
 <article class="relative flex h-full flex-col">
   <div class="flex-1 overflow-y-auto px-8 pb-16 pt-32 md:pl-4 md:pr-8">
     <hgroup class=" mb-4 flex w-full flex-col gap-1 font-cabinet opacity-90">
       <h1 class=" text-4xl font-bold">
         {data.journalEntry?.date}
       </h1>
+      <!-- Show the mood if a mood has been set -->
       {#if data.journalEntry?.mood != ''}
         <h2 class=" text-lg">
           Mood: <b class="text-xl font-extrabold">{data.journalEntry?.mood}</b>

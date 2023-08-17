@@ -2,6 +2,8 @@
   <title>Privacy Policy | dreamscribe</title>
 </svelte:head>
 
+<!-- Relatively simple page, just shows the privacy policy and nothing else -->
+
 <div
   class="flex h-full w-full max-w-full flex-col gap-4 overflow-y-auto px-8 pb-16 pt-32 text-justify font-supreme text-xl md:pl-4 md:pr-8"
 >

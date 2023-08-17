@@ -1,6 +1,9 @@
 <script>
-  import { fly, fade } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
 </script>
+
+<!-- This is the Base modal. All other modals should inherit the styles and
+other attributes of this modal, but provide their own content -->
 
 <div
   role="dialog"

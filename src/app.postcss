@@ -59,6 +59,7 @@ select {
 }
 
 @layer utilities {
+  /* My button variant styles */
   .btn-primary {
     @apply bg-base2 fill-base03 stroke-base03 text-base03;
   }
@@ -71,10 +72,4 @@ select {
   .btn-disabled {
     @apply cursor-not-allowed bg-base1 fill-base01 stroke-base01 text-base01;
   }
-}
-
-[contenteditable='true']:empty:before {
-  content: attr(placeholder);
-  pointer-events: none;
-  display: block; /* For Firefox */
 }
