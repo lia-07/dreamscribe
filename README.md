@@ -2,6 +2,13 @@
 
 A free online dream journal made as a part of my Year 11 Digi Class. Built with Svelte and TailwindCSS.
 
+## Features
+- Record and update entries in the dream journal
+- See all of your previous journal entries
+- Download or delete your previous journal entries
+- Install as a progressive web app
+- Read the Privacy Policy to see how your data is managed
+
 ## Setup instructions
 
 If I haven't hosted this somewhere, you can run the project by following these steps
