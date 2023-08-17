@@ -94,7 +94,7 @@
   {#if showFadeOnTextArea}
     <div
       transition:fade
-      class="pointer-events-none absolute left-0 top-0 z-40 h-60 w-full bg-gradient-to-b from-base03 to-transparent"
+      class="pointer-events-none absolute left-0 top-0 z-30 h-60 w-full bg-gradient-to-b from-base03 to-transparent"
     />
   {/if}
   <!-- Notice the 'bind:value' attribute. This is what connects the 
@@ -102,7 +102,7 @@
   <textarea
     bind:value={textInput}
     on:scroll={showTheFade}
-    class="h-full w-full max-w-full resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent pb-32 pl-4 pr-8 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none placeholder:text-base1 focus:ring-0"
+    class="h-full w-full max-w-full resize-none scroll-pb-16 overflow-y-auto scroll-smooth whitespace-pre-wrap border-none bg-transparent px-8 pb-32 pt-32 font-supreme text-xl leading-8 tracking-wider text-opacity-75 outline-none placeholder:text-base1 focus:ring-0 md:pl-4 md:pr-8"
     placeholder="Start typing what you dreamed..."
     id="mainTextarea"
   />

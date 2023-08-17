@@ -1,5 +1,5 @@
 <div
-  class="flex h-full w-full max-w-full flex-col gap-4 overflow-y-auto pb-16 pl-4 pr-8 pt-32 text-justify font-supreme text-xl"
+  class="flex h-full w-full max-w-full flex-col gap-4 overflow-y-auto px-8 pb-16 pt-32 text-justify font-supreme text-xl md:pl-4 md:pr-8"
 >
   <hgroup class=" flex w-full flex-col font-cabinet opacity-90">
     <h1 class="text-4xl font-bold">Privacy Policy</h1>

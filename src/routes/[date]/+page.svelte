@@ -3,6 +3,9 @@
   import type { PageData } from './$types';
   export let data: PageData;
 
+  import { openModal } from 'svelte-modals';
+  import DeleteEntry from '$lib/modals/DeleteEntry.svelte';
+
   import Button from '$lib/components/Button.svelte';
   import Icon from '$lib/assets/Icon.svelte';
   import { journalEntries } from '$lib/stores/journalEntries';
@@ -43,29 +46,13 @@
     // clean up
     URL.revokeObjectURL(url);
   }
-
-  // deletes the current entry and sends the user home
-  function deleteEntry() {
-    // find the numerical index of the entry to delete
-    const matchingIndex = $journalEntries.findIndex(
-      (journalEntry) => journalEntry.date === data.journalEntry.date
-    );
-
-    // delete that entry
-    journalEntries.update((existingEntries) => {
-      return existingEntries.filter((entry, i) => i !== matchingIndex);
-    });
-
-    // send the user home
-    window.location.href = '/';
-  }
 </script>
 
 <svelte:head>
   <title>{data.journalEntry?.date} | dreamscribe</title>
 </svelte:head>
 <article class="relative flex h-full flex-col">
-  <div class="flex-1 overflow-y-auto pb-16 pl-4 pr-8 pt-32">
+  <div class="flex-1 overflow-y-auto px-8 pb-16 pt-32 md:pl-4 md:pr-8">
     <hgroup class=" mb-4 flex w-full flex-col gap-1 font-cabinet opacity-90">
       <h1 class=" text-4xl font-bold">
         {data.journalEntry?.date}
@@ -85,7 +72,10 @@
       <span slot="icon"><Icon name="download" /></span>
       <span slot="text">Download</span>
     </Button>
-    <Button variant="primary" on:buttonClick={deleteEntry}>
+    <Button
+      variant="primary"
+      on:buttonClick={() => openModal(DeleteEntry, { date: data.journalEntry.date })}
+    >
       <span slot="icon"><Icon name="trash" /></span>
       <span slot="text">Delete</span>
     </Button>
