@@ -19,8 +19,8 @@
     browser's local storage.
   </p>
   <p>
-    We committed to maintaining the utmost respect for your privacy while providing a seamless and
-    simple user experience. We firmly uphold our promise that no trace of any of any of your journal
+    We are committed to maintaining the utmost respect for your privacy while providing a seamless
+    and simple user experience. We firmly uphold our promise that no trace of any of your journal
     entries leave insides of your browser, unless you choose to download them and publish them
     elsewhere. The dreamscribe experience is powered entirely by in-browser technology, and there is
     no server processing of your journal entries.
