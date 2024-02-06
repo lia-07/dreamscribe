@@ -3,8 +3,7 @@
   import '../app.postcss';
 
   // Import transition
-  import { slide, fade } from 'svelte/transition';
-
+  import { fade, fly, slide } from 'svelte/transition';
   // import modal stuff
   import { Modals, closeModal } from 'svelte-modals';
 
@@ -85,7 +84,7 @@
       {@const currentYear = $currentDate.split(' ')[2]}
 
       <a
-        transition:slide
+        transition:fly={{ y: -20 }}
         href={journalEntry.date == $currentDate ? '/' : journalEntry.date}
         class="active-journal-entry group relative isolate flex h-fit w-full gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-90 active:scale-95"
       >
@@ -120,51 +119,55 @@
       aria-hidden="true"
       on:click={drawerInvert}
     >
-      <aside
+      <div
+        class="absolute bottom-0 right-0 top-0 box-content h-screen overflow-clip"
         transition:slide={{ axis: 'x' }}
-        class="no-scrollbar absolute bottom-0 right-0 top-0 box-content flex h-screen w-80 shrink-0 flex-col overflow-y-auto rounded-l-xl bg-base03 p-4 transition-all"
       >
-        {#if $journalEntries.length > 0}
-          <hgroup
-            class="text-cabinet mb-1 flex w-full items-center justify-between pl-2 text-2xl font-bold opacity-90"
-          >
-            <h1>Journal {$journalEntries.length == 1 ? 'Entry' : 'Entries'}:</h1>
-            <button class="flex h-8 w-8 appearance-none items-center justify-center"
-              ><Icon name="x" sizeInRem={1.25} /></button
+        <aside
+          class="no-scrollbar box-content flex h-screen w-80 shrink-0 flex-col overflow-y-auto rounded-l-xl bg-base03 p-4 transition-all"
+        >
+          {#if $journalEntries.length > 0}
+            <hgroup
+              class="text-cabinet mb-1 flex w-full items-center justify-between pl-2 text-2xl font-bold opacity-90"
             >
-          </hgroup>
-        {/if}
-        {#each $journalEntries as journalEntry}
-          {@const journalEntryDate = journalEntry.date.split(' ')}
-          {@const currentYear = $currentDate.split(' ')[2]}
-          <a
-            transition:slide
-            href={journalEntry.date == $currentDate ? '/' : journalEntry.date}
-            class="active-journal-entry group relative isolate flex h-fit w-full shrink-0 gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-90 active:scale-95"
-          >
-            <div
-              class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
-            >
-              <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
-              <span
-                class="font-cabinet font-bold"
-                class:text-sm={currentYear != journalEntryDate[2]}
-                >{journalEntryDate[1]}{currentYear != journalEntryDate[2]
-                  ? " '" + journalEntryDate[2].slice(2)
-                  : ''}</span
+              <h1>Journal {$journalEntries.length == 1 ? 'Entry' : 'Entries'}:</h1>
+              <button class="flex h-8 w-8 appearance-none items-center justify-center"
+                ><Icon name="x" sizeInRem={1.25} /></button
               >
-            </div>
-            <p class=" line-clamp-3 text-ellipsis text-base3">
-              {journalEntry.content}
-            </p>
-          </a>
-        {/each}
-        {#if $journalEntries.length > 7}
-          <div
-            class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
-          />
-        {/if}
-      </aside>
+            </hgroup>
+          {/if}
+          {#each $journalEntries as journalEntry}
+            {@const journalEntryDate = journalEntry.date.split(' ')}
+            {@const currentYear = $currentDate.split(' ')[2]}
+            <a
+              transition:fly={{ y: -20 }}
+              href={journalEntry.date == $currentDate ? '/' : journalEntry.date}
+              class="active-journal-entry group relative isolate flex h-fit w-full shrink-0 gap-3 rounded-md p-2 opacity-75 transition-all hover:bg-base02 hover:opacity-90 active:scale-95"
+            >
+              <div
+                class="flex h-16 w-16 shrink-0 flex-col items-center justify-center self-center rounded bg-base2 text-base03"
+              >
+                <span class="-mb-2 font-cabinet text-4xl font-bold">{journalEntryDate[0]}</span>
+                <span
+                  class="font-cabinet font-bold"
+                  class:text-sm={currentYear != journalEntryDate[2]}
+                  >{journalEntryDate[1]}{currentYear != journalEntryDate[2]
+                    ? " '" + journalEntryDate[2].slice(2)
+                    : ''}</span
+                >
+              </div>
+              <p class=" line-clamp-3 text-ellipsis text-base3">
+                {journalEntry.content}
+              </p>
+            </a>
+          {/each}
+          {#if $journalEntries.length > 7}
+            <div
+              class="pointer-events-none absolute bottom-0 h-60 w-80 shrink-0 bg-gradient-to-t from-base03 via-base03/75 to-transparent"
+            />
+          {/if}
+        </aside>
+      </div>
     </div>
   {/if}
 </div>

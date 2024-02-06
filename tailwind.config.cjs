@@ -5,8 +5,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        cabinet: ['"CabinetGrotesk"'],
-        supreme: ['"Supreme"']
+        cabinet: ['cabinet-grotesk', 'serif'],
+        public: ['public-sans', 'sans-serif']
       },
       colors: {
         base03: '#002b36',
